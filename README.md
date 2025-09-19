@@ -2,9 +2,9 @@
 
 ## Student Details
 
-Full name: `Reon Nguyen`
+- **Full Name:** `Reon Nguyen`
 
-ccid: `ngoctha1`
+- **ccid:** `ngoctha1`
 
 ## References and Resources
 
