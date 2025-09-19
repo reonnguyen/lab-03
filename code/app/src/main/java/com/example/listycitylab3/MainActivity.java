@@ -11,7 +11,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements AddCityFragment.AddCityDialogListener{
+public class MainActivity extends AppCompatActivity implements
+        AddCityFragment.AddCityDialogListener, EditCityFragment.EditCityDialogListener {
 
     private ArrayList<City> dataList;
     private ListView cityList;
@@ -20,6 +21,12 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
     @Override
     public void addCity(City city) {
         cityAdapter.add(city);
+        cityAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void editCity(City city, int position) {
+        dataList.set(position, city);
         cityAdapter.notifyDataSetChanged();
     }
 
@@ -43,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
         FloatingActionButton fab = findViewById(R.id.button_add_city);
         fab.setOnClickListener(v -> {
             new AddCityFragment().show(getSupportFragmentManager(), "Add City");
+        });
+
+        cityList.setOnItemClickListener((parent, view, position, id) -> {
+            City city = dataList.get(position);
+            EditCityFragment.newInstance(city, position).show(getSupportFragmentManager(), "Edit City");
         });
     }
 }
